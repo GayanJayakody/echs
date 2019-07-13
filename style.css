@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700');
 
+
+.button1 {
+  background-color : #4CAF50; 
+  color: white; 
+  border: 2px solid #4CAF50;
+   padding: 4px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 23px;
+}
+
+.button1:hover {
+  background-color: #45a049;
+  border: 2px solid #45a049;
+  color: white;
+   padding: 4px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 23px;
+}
+
+
 body {
     color: #262626;
     font-size: 16px;
@@ -10,6 +34,126 @@ body {
 img {
     vertical-align: baseline;
 }
+
+
+/*login*/
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width:50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+.modelbutton {
+  background-color: #4CAF50;
+  color: white;
+    padding: 14px 20px;
+    margin-bottom: 0;
+  border: none;
+    cursor: pointer;
+    width:20%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 2px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 30%;
+  border-radius: 50%;
+}
+
+.container {
+    padding: 8px 16px;
+    margin-bottom: 0px;
+    border-radius: 5px;
+}
+
+.container1{
+    margin-bottom:10%;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+ /* The Modal (background) */
+ .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 10000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5px auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 70%;
+}
+
+/* The Close Button */
+.close {
+  /* Position it in the top right corner outside of the modal */
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+/* Close button on hover */
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+} 
 
 /*--------------------------------------------------------------
 # Links
@@ -87,6 +231,7 @@ a:hover, a:active {
     color: #fff;
     text-decoration: navajowhite;
     background: #262222;
+    cursor: pointer;c
 }
 
 /*
@@ -1938,7 +2083,6 @@ ul.tabs-nav .tab-nav.active {
 
 .contact-form {
     padding: 35px 20px 55px;
-    margin-top: 96px;
     background: #edf3f5;
 }
 
@@ -1985,6 +2129,15 @@ ul.tabs-nav .tab-nav.active {
     height: 440px;
 }
 
+
+.table-view td{
+    color: black;   
+}
+
+.table-view{
+    display: none;
+    height:500px;
+}
 /*--------------------------------------------------------------
 # Contact Page
 --------------------------------------------------------------*/

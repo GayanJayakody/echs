@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) { // if submit button on the form is clicked
             $sql = "UPDATE projects SET report_link='$filename' WHERE project_id=$project_id";
             if (mysqli_query($conn, $sql)) {
                 echo "File uploaded successfully";
-                header("Location: edit projects admin.php");
+                header("Location: AdminEditProjects.php");
             }
         } else {
             echo "Failed to upload file.";

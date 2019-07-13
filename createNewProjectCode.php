@@ -49,7 +49,6 @@ $name=$_POST['name'];
 $description=$_POST['description'];
 $estimatedCost=$_POST['estcost'];
 $estimatedCost=str_replace(' ','',$estimatedCost);
-$estimatedCostdoubleval=doubleval($estimatedCost);
 $filename = ''.$name.".php";
 $link='./newProjects/'.$filename.''; //this is is with spaces
 $newlink=str_replace(' ','%20',$link); // replace spaces with %20 since url cannot have spaces
@@ -58,7 +57,7 @@ $newlink=str_replace(' ','%20',$link); // replace spaces with %20 since url cann
 require_once('Database Connection ObjectPool.php');
 $conn = $dbConnectionPool->get();
 
-$sql = "INSERT INTO projects(name,state,description,page_link,img_link,estimated_cost) VALUES ('$name','0','$description','$newlink','$img_link',$estimatedCostdoubleval)"; // insert data to the created table
+$sql = "INSERT INTO projects(name,state,description,page_link,img_link,estimated_cost,raised) VALUES ('$name','0','$description','$newlink','$img_link',$estimatedCost,'0')"; // insert data to the created table
     if ($conn->query($sql)===TRUE){
 		$last_id = $conn->insert_id;
 		echo "<h3>New project details has been submitted to database. Project id is ".$last_id."</h3><br>";
@@ -84,66 +83,66 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 
     <!-- FontAwesome CSS -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
 
     <!-- ElegantFonts CSS -->
-    <link rel="stylesheet" href="css/elegant-fonts.css">
+    <link rel="stylesheet" href="../css/elegant-fonts.css">
 
     <!-- themify-icons CSS -->
-    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="../css/themify-icons.css">
 
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="../css/swiper.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="top-header-bar">
-            <div class="container">
-                <div class="row flex-wrap justify-content-center justify-content-lg-between align-items-lg-center">
-                    <div class="col-12 col-lg-8 d-none d-md-flex flex-wrap justify-content-center justify-content-lg-start mb-3 mb-lg-0">
-                        <div class="header-bar-email">
-                            MAIL: <a href="#">everyonecanhelpsomeone@gmail.com</a>
-                        </div><!-- .header-bar-email -->
+<header class="site-header">
+<div class="top-header-bar">
+    <div class="container">
+        <div class="row flex-wrap justify-content-center justify-content-lg-between align-items-lg-center">
+            <div class="col-12 col-lg-8 d-none d-md-flex flex-wrap justify-content-center justify-content-lg-start mb-3 mb-lg-0">
+                <div class="header-bar-email">
+                    MAIL: <a href="#">everyonecanhelpsomeone@gmail.com</a>
+                </div><!-- .header-bar-email -->
 
-                        <div class="header-bar-text">
-                            <p>PHONE: <span>+94112564517 / +94775672431</span></p>
-                        </div><!-- .header-bar-text -->
-                    </div><!-- .col -->
+                <div class="header-bar-text">
+                    <p>PHONE: <span>+94112564517 / +94775672431</span></p>
+                </div><!-- .header-bar-text -->
+            </div><!-- .col -->
 
-                    <div class="col-12 col-lg-4 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
-                        <div class="donate-btn">
-                            <a href="#">Donate Now</a>
-							<a href="#">Login</a>
-                        </div><!-- .donate-btn -->
-                    </div><!-- .col -->
-                </div><!-- .row -->
-            </div><!-- .container -->
-        </div><!-- .top-header-bar -->
+            <div class="col-12 col-lg-4 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
+                <div class="donate-btn">
+                    <a href="../DonationDetails.php">Donate Now</a>
+                    
+                </div><!-- .donate-btn -->
+            </div><!-- .col -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+</div><!-- .top-header-bar -->
 
-        <div class="nav-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 d-flex flex-wrap justify-content-between align-items-center">
-                        <div class="site-branding d-flex align-items-center">
-                           <a class="d-block" href="index.html" rel="home"><img class="d-block" src="images/logo4.png" alt="logo" style="width: 400px; height: 50px"></a>
-                        </div><!-- .site-branding -->
+<div class="nav-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex flex-wrap justify-content-between align-items-center">
+                <div class="site-branding d-flex align-items-center">
+                   <a class="d-block" href="index.html" rel="home"><img class="d-block" src="../images/logo4.png" alt="logo" style="width: 400px; height: 50px"></a>
+                </div><!-- .site-branding -->
 
-                        <nav class="site-navigation d-flex justify-content-end align-items-center">
-                            <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                <li class="current-menu-item"><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About us</a></li>
-                                
-                                <li><a href="portfolio.html">Gallery</a></li>
-                                <li><a href="news.html">Projects</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                        </nav><!-- .site-navigation -->
+                <nav class="site-navigation d-flex justify-content-end align-items-center">
+                    <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-content-center">
+                        <li class="current-menu-item"><a href="../HomePage.php">Home</a></li>
+                        <li><a href="../aboutUs.php">About us</a></li>
+                        
+                        <li><a href="../portfolio.html">Gallery</a></li>
+                        <li><a href="../ProjectsView.php">Projects</a></li>
+                        <li><a href="../ContactForm.php">Contact</a></li>
+                    </ul>
+                </nav><!-- .site-navigation -->
 
                         <div class="hamburger-menu d-lg-none">
                             <span></span>
@@ -213,7 +212,7 @@ echo \'<div class="col-12 col-lg-6 order-2 order-lg-1">
 		</div><!-- .entry-content -->
 
 		<div class="entry-footer mt-5">
-				<a href="#" class="btn gradient-bg mr-2">Donate</a>
+				<a href="../DonationDetails.php" class="btn gradient-bg mr-2">Donate</a>
 		</div><!-- .entry-footer -->
 </div><!-- .welcome-content -->
 </div><!-- .col -->
@@ -226,14 +225,7 @@ echo \'<div class="col-12 col-lg-6 order-2 order-lg-1">
 </div><!-- .container -->
 </div><!-- .home-page-icon-boxes -->
 
-<script type=\'text/javascript\' src=\'js/jquery.js\'></script>
-<script type=\'text/javascript\' src=\'js/jquery.collapsible.min.js\'></script>
-<script type=\'text/javascript\' src=\'js/swiper.min.js\'></script>
-<script type=\'text/javascript\' src=\'js/jquery.countdown.min.js\'></script>
-<script type=\'text/javascript\' src=\'js/circle-progress.min.js\'></script>
-<script type=\'text/javascript\' src=\'js/jquery.countTo.min.js\'></script>
-<script type=\'text/javascript\' src=\'js/jquery.barfiller.js\'></script>
-<script type=\'text/javascript\' src=\'js/custom.js\'></script>
+
 
 </body>
 </html>

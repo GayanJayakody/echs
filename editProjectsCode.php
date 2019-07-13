@@ -37,7 +37,7 @@ if(isset($_POST['update']))
 		$result = mysqli_query($conn, "UPDATE projects SET name='$name',state='$state',description='$description',progress='$progress',estimated_cost='$estimated_cost',raised='$raised' WHERE project_id=$project_id");
 		
 		//redirectig to the display page. In our case, it is index.php
-		header("Location: edit projects admin.php");
+		header("Location: AdminEditProjects.php");
 	}
 }
 //getting id from url

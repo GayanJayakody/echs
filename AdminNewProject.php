@@ -1,8 +1,24 @@
+<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script>
+function checkAvailability() {
+	$("#loaderIcon").show();
+	jQuery.ajax({
+	url: "check_availability.php",
+	data:'name='+$("#name").val(),
+	type: "POST",
+	success:function(data){
+		$("#user-availability-status").html(data);
+		$("#loaderIcon").hide();
+	},
+	error:function (){}
+	});
+}
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Propose Project</title>
+    <title>New project</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -43,9 +59,8 @@
 
                 <div class="col-12 col-lg-5 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
                     <div class="donate-btn">
-                        <a href="#">Donate Now</a>
-						<a href="#">Log in</a>
-						<a href="#">Sign in</a>
+                         <a href="#">Donate Now</a>
+                          <a onclick="document.getElementById('id01').style.display='block'">My Profile</a>
                     </div><!-- .donate-btn -->
                 </div><!-- .col -->
             </div><!-- .row -->
@@ -57,16 +72,17 @@
             <div class="row">
                 <div class="col-12 d-flex flex-wrap justify-content-between align-items-center">
                     <div class="site-branding d-flex align-items-center">
-                        <a class="d-block" href="index.html" rel="home"><img class="d-block" src="images/logo4.png" alt="logo" style="width: 400px; height: 50px"></a>
+                        <a class="d-block" href="HomePage.php" rel="home"><img class="d-block" src="images/logo4.png" alt="logo" style="width: 400px; height: 50px"></a>
                     </div><!-- .site-branding -->
 
                     <nav class="site-navigation d-flex justify-content-end align-items-center">
                         <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                            <li class="current-menu-item"><a href="index.php">Home</a></li>
-                                <li><a href="about.php">About us</a></li> 
-                                <li><a href="portfolio.html">Gallery</a></li>
-                                <li><a href="projectview.php">Projects</a></li>
-                                <li><a href="contact.php">Contact</a></li>
+                        <li class="current-menu-item"><a href="indexAdmin.php">Home</a></li>
+                                <li><a href="ProjectsView.php">Projects</a></li>
+                                <li><a href="AdminViewProposedProjects.php">Proposed Projects</a></li>
+                                <li><a href="AdminNewProject.php">Add Project</a></li>
+                                <li><a href="AdminEditProjects.php">Edit Project</a></li>
+                                <li><a onclick="addMember()">Add Member</a></li>
                         </ul>
                     </nav><!-- .site-navigation -->
 
@@ -82,11 +98,108 @@
     </div><!-- .nav-bar -->
 </header><!-- .site-header -->
 
+     <script>
+        var noOfMembers=0;
+        function test(){
+            var members=[]
+            var count=0;
+            for(i=1;i<100;i++){
+                if(document.getElementById(i).checked){
+                    alert('done');
+                    var mail=document.getElementById(i).value;
+                    var xmlhttp=new XMLHttpRequest();
+
+                    xmlhttp.onreadystatechange=function(){
+
+                        if(this.readyState==4 && this.status==200){
+                         
+                        }
+                    }
+                
+                    xmlhttp.open("GET","approveMember.php?mail="+mail,true);
+                    xmlhttp.send();
+                }
+            }
+            alert('Accounts Created');
+
+        }
+
+
+         function addMember(){
+            document.getElementById("slider").style.display="none";
+            document.getElementById("home-page-boxes").style.display="none";
+            document.getElementById("home-page-welcome").style.display="none";
+            document.getElementById("our-causes").style.display="none";
+            document.getElementById("causes").style.display="none";
+            document.getElementById("approve-member").style.display="block";
+
+
+
+
+
+
+            var xmlhttp=new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange=function(){
+
+                if(this.readyState==4 && this.status==200){
+                    document.getElementById("member-details").innerHTML=this.responseText;
+                    
+                }
+            }
+                
+            xmlhttp.open("GET","getRequestedMember.php",true);
+            xmlhttp.send();
+
+
+            
+         }
+
+
+        class buttn{
+            constructor(mail){
+                this.mail=mail; 
+                var btn="<button class='button1' id='$mail'>Approve</button>";
+            }
+
+            approve(mail){
+                var xmlhttp=new XMLHttpRequest();
+
+                xmlhttp.onreadystatechange=function(){
+
+                    if(this.readyState==4 && this.status==200){
+                        alert("Account Created");
+                    }
+                }
+                
+                xmlhttp.open("GET","approveMember.php?mail="+mail,true);
+                xmlhttp.send();
+            }
+        }
+
+
+        function approveMember(){
+            alert('done');
+            var xmlhttp=new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange=function(){
+
+                if(this.readyState==4 && this.status==200){
+                    alert("Accounts Created");
+                }
+            }
+                
+            xmlhttp.open("GET","approveMember.php?mail="+mail,true);
+            xmlhttp.send();
+        }
+     </script>  
+
+
     <div class="page-header">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>Purpose a Project</h1>
+                    <h1>Add a New Project</h1>
                 </div><!-- .col -->
             </div><!-- .row -->
         </div><!-- .container -->
@@ -99,59 +212,28 @@
                    
                 </div><!-- .col -->
 
-                <div class="col-12 col-lg-11">
+                <div class="col-12 col-lg-10">
+				<form class="contact-form" action="createNewProjectCode.php" method="post" enctype="multipart/form-data">
+
+                                        <label for="pname">Project Name</label>
+                                        <input type="text" id="name" name="name" placeholder="Project 1" onBlur="checkAvailability()"><span id="user-availability-status"></span>
+																				<p><img src="LoaderIcon.gif" id="loaderIcon" style="display:none" /></p>
+
+                                        <label for="Description">Project Description</label><br>
+                                        <textarea name="description" placeholder="Please give a brief description about the project" rows="10" cols="50">
+																				</textarea>
+
+																				<label for="estcost">Estimated Cost</label>
+                                        <input type="text" id="estcost" name="estcost" placeholder="000.00">
+
+																				<input class="btn gradient-bg" type="file" name="fileToUpload" id="fileToUpload">
+    																		
+
+    
+										<input class="btn gradient-bg" type="submit" value="SUBMIT">
+									</form>
                     
-<form class="contact-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-  	<!--form action="sendToProposedProject.php" method="post" /-->
-
-    <label for="fname">Your Name</label>
-    <input type="text" id="name" name="name" placeholder="Kumar">
-
-    <label for="pnumber">Contact No</label>
-    <input type="text" id="pnumber" name="pnumber" placeholder="0773608701">
-
-    <label for="email">Email Address</label>
-    <input type="text" id="email" name="email" placeholder="computer@gmail.com">
-
-    <label for="Description">Project Description</label>
-    <input type="text" id="description" name="description" placeholder="Please give a brief description about the project">
-    
-    </select>
-    
-    <input class="btn gradient-bg" type="submit" value="Submit">
-  </form>
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                          
-$name=$_POST['name'];
-echo "Name: ".$name."<br>";
-$pnumber=$_POST['pnumber'];
-echo "Your Phone Number: ".$pnumber."<br>";
-$email=$_POST['email'];
-echo "Your Emali Address: ".$email."<br>";
-$description=$_POST['description'];
-echo "Description: ".$description."<br>";
-$date=strval(date("Y-m-d"));
-$time= strval(date("H:i:s"));
-
-require_once('Database Connection ObjectPool.php');
-$conn = $dbConnectionPool->get();
-
-if ($conn->connect_error){                       
-    die("Connection failed: " . $conn->connect_error);
-} 
-
-$sql = "INSERT INTO proposedprojects(readed,submitdate,submittime,proposername,pnumber,email,description) VALUES (false,'$date','$time','$name','$pnumber','$email','$description')";
-if ($conn->query($sql)===TRUE){
-    echo "<h3>The project you proposed has been recorded successfully</h3>"."<h3>We will contact you soon..</h3>";
-}else{
-    echo "Error: ". $sql ."<br>" . $conn->error;
-}
-}
-
-    
-?>
+					
 
                 </div><!-- .col -->
 

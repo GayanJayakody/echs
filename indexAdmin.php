@@ -1,11 +1,12 @@
-
 <?php
-session_start();
+    session_start();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home Page</title>
+    <title>Hello World</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -30,7 +31,7 @@ session_start();
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="site-header">
+<header class="site-header">
         <div class="top-header-bar">
             <div class="container">
                 <div class="row flex-wrap justify-content-center justify-content-lg-between align-items-lg-center">
@@ -46,9 +47,8 @@ session_start();
 
                     <div class="col-12 col-lg-5 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
                         <div class="donate-btn">
-                            <a href="DonationDetails.php">Donate Now</a>
-							<a onclick="document.getElementById('id01').style.display='block'">LOG IN</a>
-                            <a onclick="document.getElementById('id02').style.display='block'">SIGN UP</a>
+                            <a href="#">Donate Now</a>
+                            <a href="myProfile.php">My Profile</a>
                         </div><!-- .donate-btn -->
                     </div><!-- .col -->
                 </div><!-- .row -->
@@ -58,19 +58,21 @@ session_start();
         <div class="nav-bar">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 d-flex flex-wrap justify-content-between align-items-center">
+                    <div class="col-12 col-lg-0 d-flex flex-wrap justify-content-between align-items-center">
                         <div class="site-branding d-flex align-items-center">
                            <a class="d-block" href="index.html" rel="home"><img class="d-block" src="images/logo4.png" alt="logo" style="width: 400px; height: 50px"></a>
                         </div><!-- .site-branding -->
 
                         <nav class="site-navigation d-flex justify-content-end align-items-center">
                             <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                <li class="current-menu-item"><a href="index.html">Home</a></li>
-                                <li><a href="aboutUs.php">About us</a></li>
-                                
-                                <li><a href="portfolio.html">Gallery</a></li>
+                                <li class="current-menu-item"><a href="indexAdmin.php">Home</a></li>
                                 <li><a href="ProjectsView.php">Projects</a></li>
-                                <li><a href="ContactForm.php">Contact</a></li>
+                                <li><a href="AdminViewProposedProjects.php">Proposed Projects</a></li>
+                                <li><a href="AdminNewProject.php">Add Project</a></li>
+                                <li><a href="AdminEditProjects.php">Edit Project</a></li>
+                                <li><a href="AdminConfirmDonations.php">Donations</a></li>
+                                <li><a onclick="addMember()">Add Member</a></li>
+
                             </ul>
                         </nav><!-- .site-navigation -->
 
@@ -85,193 +87,114 @@ session_start();
             </div><!-- .container -->
         </div><!-- .nav-bar -->
 
-        <div id="id01" class="modal">
-        <form class="modal-content animate" method="POST">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <img src="images/login.jpg" alt="Avatar" class="avatar">
-            </div>
 
-            <div class="text-center">
-                <label for="email"><b>Email</b></label><br>
-                <input type="text" placeholder="Enter Email" id="email" oninput="removeBorder('email')"><br>
+    <div class="text-center table-view" id="approve-member">
 
-                <label for="psw" class="text-center"><b>Password</b></label><br>
-                <input type="password" placeholder="Enter Password" id="password" oninput="removeBorder('password')"><br>
-                    
-                <p id="ErrMsg" class="text-center text-danger"></p>
-
-                <button type="button" class="modelbutton" onclick="login()">Login</button>
-            </div>
-
-            <div class="container" style="background-color:#f1f1f1;width:100%;">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="modelbutton cancelbtn">Cancel</button>
-            
-            </div>
-
-        </form>
-        </div>
+        <p id="member-details" class=""></p>   
 
 
-        <div id="id02" class="modal">
-        <form class="modal-content animate" method="POST">
+    </div>
 
-            <div>
-                <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-            </div>
-            
-
-            <div class="text-center contact-form">
-
-                <label for="fname">Full Name</label>
-                <input type="text" id="fullname" name="fullname" placeholder="Kumar Sangakkara" oninput="removeBorder('fullname')">
-                <label for="birthday">Birthday</label><br>
-                <input type="date" name="birthday" id="birthday" oninput="removeBorder('birthday')">
-                <input type="radio" name="gender" id="male" value="male" style="width:30px;height:10px"> Male
-                <input type="radio" name="gender" id="female" value="female" style="width:30px;height:10px;margin-left:20px"> Female<br><br>
-                <label for="email">Email Address</label>
-                <input type="text" id="emai" name="email" placeholder="computer@gmail.com" oninput="removeBorder('emai')">
-                <p id="ErrEmail" class="text-center text-danger"></p>
-                <label for="pnumber">Phone Number</label>
-                <input type="text" id="pnumber" name="pnumber" placeholder="0717303215" oninput="removeBorder('pnumber')">
-                <label for="address">Address</label>
-                <input type="text" id="address" name="address" placeholder="Address" oninput="removeBorder('address')">
-                <label for="password">Password</label>
-                <input type="password" id="PW" name="password" placeholder="Password" oninput="removeBorder(PW')">
-
-                
-                <button type="button" class="btn gradient-bg" onclick="save()">SUBMIT</button>
-
-
-            </div>
-
-            <div class="container" style="background-color:#f1f1f1;width:100%;">
-                <button type="button" onclick="document.getElementById('id02').style.display='none'" class="modelbutton cancelbtn">Cancel</button>
-            
-            </div>
-
-        </form>
-        </div>
-
-        <script>
-            function login(){
-                if(document.getElementById("email").value=="" && document.getElementById("password").value==""){
-                    document.getElementById("email").style.border="1px solid #ff8080";
-                    document.getElementById("password").style.border="1px solid #ff8080";
-                }else if(document.getElementById("email").value==""){
-                    document.getElementById("email").style.border="1px solid #ff8080";
-                }else if(document.getElementById("password").value==""){
-                    document.getElementById("password").style.border="1px solid #ff8080";
-                }else{
-                
-                    var email=document.getElementById("email").value;
-                    var password=document.getElementById("password").value;
-                
+     <script>
+        var noOfMembers=0;
+        function test(){
+            var members=[]
+            var count=0;
+            for(i=1;i<100;i++){
+                if(document.getElementById(i).checked){
+                    alert('done');
+                    var mail=document.getElementById(i).value;
                     var xmlhttp=new XMLHttpRequest();
+
                     xmlhttp.onreadystatechange=function(){
-                    
+
                         if(this.readyState==4 && this.status==200){
-                           // alert(this.responseText);
-                            
-                            if(this.responseText=="success-admin"){
-                                window.location.href = "indexAdmin.php";
-                            }else if(this.responseText=="success-member"){
-                                window.location.href="indexMember.php";
-                            }else if(this.responseText=="Invalid Email"){
-                                document.getElementById("email").style.border="1px solid #ff8080";
-                                document.getElementById("ErrMsg").innerHTML="Invalid Email";
-                            }else if(this.responseText=="Password Incorrect"){
-                                document.getElementById("password").style.border="1px solid #ff8080";
-                                document.getElementById("ErrMsg").innerHTML="Incorrect Password";
-                                
-                            }else if(this.responseText=="not-created"){
-                                document.getElementById("ErrMsg").innerHTML="Your account has not been approved yet";
-                            }
-                        }   
-                    }   
-                    xmlhttp.open("POST","login.php",true);
-                    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    xmlhttp.send("email="+email+"&password="+password); 
-                }
-            }
-            function save(){
-                    if(document.getElementById("fullname").value==""){
-                        document.getElementById("fullname").style.border="1px solid #ff4d4d";
-                    }   
-                    if(document.getElementById("birthday").value==""){
-                        document.getElementById("birthday").style.border="1px solid #ff4d4d";
-                    }
-                    if(document.getElementById("emai").value==""){
-                        document.getElementById("emai").style.border="1px solid #ff4d4d";
-                    } 
-                       
-                    if(document.getElementById("pnumber").value==""){
-                        document.getElementById("pnumber").style.border="1px solid #ff4d4d";
-                    }   
-                    if(document.getElementById("address").value==""){
-                        document.getElementById("address").style.border="1px solid #ff4d4d";
-                    }   
-                    if(document.getElementById("PW").value==""){
-                        document.getElementById("PW").style.border="1px solid #ff4d4d";
-                    }   
-                    else{
-                        var fname=document.getElementById("fullname").value;
-                        var birthday=document.getElementById("birthday").value;
-                        var email=document.getElementById("emai").value;
-                        var pnumber=document.getElementById("pnumber").value;
-                        var address=document.getElementById("address").value;
-                        var password=document.getElementById("PW").value;
-                        
-                        var gender;
-                        if(document.getElementById("male").checked){
-                            gender=document.getElementById("male").value;
-                        }else if(document.getElementById("female").checked){
-                            gender=document.getElementById("female").value;
-                        }
-                        
-                        var xmlhttp=new XMLHttpRequest();
-                        xmlhttp.onreadystatechange=function(){
-                            if(this.readyState==4 && this.status==200){
-                                alert("Details saved");
-                                window.location.href = "HomePage.php";
-                            }
-                        }
-                        xmlhttp.open("POST","addMemberDatabase.php",true);
-                        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                        xmlhttp.send("fname="+fname+"&birthday="+birthday+"&email="+email+"&pnumber="+pnumber+"&address="+address+"&password="+password+"&gender="+gender);
-                        
-                    }                           
-            }
-            function checkDuplication(){
-                var email=document.getElementById("emai").value;
-                var xmlhttp=new XMLHttpRequest();
-                xmlhttp.onreadystatechange=function(){
-                    if(this.readyState==4 && this.status==200){
-                        alert(this.responseText);
-                        if(this.responseText=="do"){
-                            alert(this.responseText);
-                            document.getElementById("ErrEmail").value="Email already exists";
+                         
                         }
                     }
+                
+                    xmlhttp.open("GET","approveMember.php?mail="+mail,true);
+                    xmlhttp.send();
                 }
-                xmlhttp.open("POST","checkValidity.php",true);
-                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xmlhttp.send("email="+email);
             }
-            function removeBorder(idname){
-                    document.getElementById(idname).style.border="1px solid #d6d6c2";
-                    document.getElementById("ErrMsg").innerHTML="";
+            alert('Accounts Created');
+
+        }
+
+
+         function addMember(){
+            document.getElementById("slider").style.display="none";
+            document.getElementById("home-page-boxes").style.display="none";
+            document.getElementById("home-page-welcome").style.display="none";
+            document.getElementById("our-causes").style.display="none";
+            document.getElementById("causes").style.display="none";
+            document.getElementById("approve-member").style.display="block";
+
+
+
+
+
+
+            var xmlhttp=new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange=function(){
+
+                if(this.readyState==4 && this.status==200){
+                    document.getElementById("member-details").innerHTML=this.responseText;
+                    
+                }
             }
+                
+            xmlhttp.open("GET","getRequestedMember.php",true);
+            xmlhttp.send();
+
+
             
-        </script>
+         }
 
 
-    </header><!-- .site-header -->
+        class buttn{
+            constructor(mail){
+                this.mail=mail; 
+                var btn="<button class='button1' id='$mail'>Approve</button>";
+            }
 
-    
+            approve(mail){
+                var xmlhttp=new XMLHttpRequest();
 
-    
-        <div class="swiper-wrapper">
+                xmlhttp.onreadystatechange=function(){
+
+                    if(this.readyState==4 && this.status==200){
+                        alert("Account Created");
+                    }
+                }
+                
+                xmlhttp.open("GET","approveMember.php?mail="+mail,true);
+                xmlhttp.send();
+            }
+        }
+
+
+        function approveMember(){
+            alert('done');
+            var xmlhttp=new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange=function(){
+
+                if(this.readyState==4 && this.status==200){
+                    alert("Accounts Created");
+                }
+            }
+                
+            xmlhttp.open("GET","approveMember.php?mail="+mail,true);
+            xmlhttp.send();
+        }
+     </script>  
+
+
+
+
+<div class="swiper-wrapper" id="slider">
             <div class="swiper-slide hero-content-wrap">
                 <img src="images/srilanka.jpg" alt="">
 
@@ -303,7 +226,7 @@ session_start();
         
     </div><!-- .hero-slider -->
 
-    <div class="home-page-icon-boxes">
+    <div class="home-page-icon-boxes" id="home-page-boxes">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4 mt-4 mt-lg-0">
@@ -360,7 +283,7 @@ session_start();
         </div><!-- .container -->
     </div><!-- .home-page-icon-boxes -->
 
-    <div class="home-page-welcome">
+    <div class="home-page-welcome" id="home-page-welcome">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-6 order-2 order-lg-1">
@@ -386,7 +309,7 @@ session_start();
 
     
 
-    <div class="our-causes">
+    <div class="our-causes" id="our-causes">
         <div class="container">
             <div class="row">
                 <div class="coL-12">
@@ -418,7 +341,7 @@ session_start();
                                         <img src="newProjects/'. $row["img_link"].'" alt="">
 
                                         <div class="figure-overlay d-flex justify-content-center align-items-center position-absolute w-100 h-100">
-                                            <a href="DonationDetails.php" class="btn gradient-bg mr-2">Donate Now</a>
+                                            <a href="#" class="btn gradient-bg mr-2">Donate Now</a>
                                         </div><!-- .figure-overlay -->
                                     </figure>
 
@@ -485,7 +408,7 @@ session_start();
 </div><!-- .our-causes -->
 
 
-<div class="our-causes">
+<div class="our-causes" id="causes">
         <div class="container">
             <div class="row">
                 <div class="coL-12">
@@ -514,7 +437,7 @@ session_start();
                                         <img src="newProjects/'. $row["img_link"].'" alt="">
 
                                         <div class="figure-overlay d-flex justify-content-center align-items-center position-absolute w-100 h-100">
-                                          
+                                            
                                         </div><!-- .figure-overlay -->
                                     </figure>
 
@@ -528,7 +451,7 @@ session_start();
                                         </div><!-- .entry-content -->
 
                                         <div class="entry-footer mt-5">
-                                        <a href="completedProjects/'. $row["name"].' complete.php" class="btn gradient-bg mr-2">Read More</a>
+                                        <a href="'. $row["page_link"].'" class="btn gradient-bg mr-2">Read More</a>
                                     </div><!-- .entry-footer -->
                             
 
@@ -635,6 +558,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script type='text/javascript' src='js/jquery.countTo.min.js'></script>
     <script type='text/javascript' src='js/jquery.barfiller.js'></script>
     <script type='text/javascript' src='js/custom.js'></script>
-
 </body>
 </html>

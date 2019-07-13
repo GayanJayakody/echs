@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Propose Project</title>
+    <title>Hello World</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -43,7 +43,7 @@
 
                 <div class="col-12 col-lg-5 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
                     <div class="donate-btn">
-                        <a href="#">Donate Now</a>
+                        <a href="DonationDetails.php">Donate Now</a>
 						<a href="#">Log in</a>
 						<a href="#">Sign in</a>
                     </div><!-- .donate-btn -->
@@ -62,11 +62,11 @@
 
                     <nav class="site-navigation d-flex justify-content-end align-items-center">
                         <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                            <li class="current-menu-item"><a href="index.php">Home</a></li>
-                                <li><a href="about.php">About us</a></li> 
+                            <li class="current-menu-item"><a href="HomePage.php">Home</a></li>
+                                <li><a href="aboutUs.php">About us</a></li> 
                                 <li><a href="portfolio.html">Gallery</a></li>
-                                <li><a href="projectview.php">Projects</a></li>
-                                <li><a href="contact.php">Contact</a></li>
+                                <li><a href="ProjectsView.php">Projects</a></li>
+                                <li><a href="ContactForm.php">Contact</a></li>
                         </ul>
                     </nav><!-- .site-navigation -->
 
@@ -86,7 +86,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>Purpose a Project</h1>
+                    <h1>Donation Details</h1>
                 </div><!-- .col -->
             </div><!-- .row -->
         </div><!-- .container -->
@@ -95,63 +95,84 @@
     <div class="contact-page-wrap">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-1">
-                   
+                <div class="col-12 col-lg-5">
+                    <div class="entry-content">
+                        <h2>Bank Account Information</h2>
+
+                        <p>Please deposit your donations to our bank account in Bank of Ceylon. After depositing fill the below form. Keep the recipt with you untill we confirm your donation via Email</p>
+
+                       
+
+                        <ul class="contact-info p-0">
+                                        <ul><li><span>Bank:</span> Bank of Ceylon</li></ul>
+										<ul><li><span>Account Number:</span> 00 000 000 00 <li></ul>
+										<ul><li><span>Account Name  :</span> Everyone Can Help Someone</li></ul>
+                        </ul>
+                    </div>
                 </div><!-- .col -->
 
-                <div class="col-12 col-lg-11">
+                <div class="col-12 col-lg-7">
                     
-<form class="contact-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-  	<!--form action="sendToProposedProject.php" method="post" /-->
+                <form class="contact-form" action="sendToDonationDetails.php" method="post" />
 
-    <label for="fname">Your Name</label>
-    <input type="text" id="name" name="name" placeholder="Kumar">
+<label for="fname">First Name</label><br>
+<input type="text" name="firstname" placeholder="Kumar"><br>
 
-    <label for="pnumber">Contact No</label>
-    <input type="text" id="pnumber" name="pnumber" placeholder="0773608701">
+  <label for="lname">Last Name</label><br>
+<input type="text" name="lastname" placeholder="Sangakkara"><br>
 
-    <label for="email">Email Address</label>
-    <input type="text" id="email" name="email" placeholder="computer@gmail.com">
+  <label for="nic">NIC/passport </label><br>
+  <input type="text" name="nic" placeholder="000000000v"><br>
 
-    <label for="Description">Project Description</label>
-    <input type="text" id="description" name="description" placeholder="Please give a brief description about the project">
-    
-    </select>
-    
-    <input class="btn gradient-bg" type="submit" value="Submit">
-  </form>
+  <label for="email">Email Address</label><br>
+  <input type="text" name="email" placeholder="computer@gmail.com"><br>
+
+  <label for="pnumber">Phone Number</label><br>
+  <input type="text" name="pnumber" placeholder="0717303215"><br>
+
+<label for="amount">Amount Rs.</label><br>
+  <input type="text" name="amount" placeholder="00.00"><br>
+
+  <label for="refno">Fund Transfer Refference Number</label><br>
+  <input type="text" name="refno" placeholder="00000000000"><br>
+
+  <label for="date">Transfer Date</label><br>
+  <input type="text" name="transferdate" placeholder="2010/10/10"><br>
+
+  <label for="project">To which ongoing projects would you like to donate</label><br>
 
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                          
-$name=$_POST['name'];
-echo "Name: ".$name."<br>";
-$pnumber=$_POST['pnumber'];
-echo "Your Phone Number: ".$pnumber."<br>";
-$email=$_POST['email'];
-echo "Your Emali Address: ".$email."<br>";
-$description=$_POST['description'];
-echo "Description: ".$description."<br>";
-$date=strval(date("Y-m-d"));
-$time= strval(date("H:i:s"));
 
-require_once('Database Connection ObjectPool.php');
-$conn = $dbConnectionPool->get();
+  //to get a database connection object from objectpool
+  require_once('Database Connection ObjectPool.php');
+  $conn = $dbConnectionPool->get();
+  //echo ''.spl_object_id($conn);
 
-if ($conn->connect_error){                       
-    die("Connection failed: " . $conn->connect_error);
-} 
 
-$sql = "INSERT INTO proposedprojects(readed,submitdate,submittime,proposername,pnumber,email,description) VALUES (false,'$date','$time','$name','$pnumber','$email','$description')";
-if ($conn->query($sql)===TRUE){
-    echo "<h3>The project you proposed has been recorded successfully</h3>"."<h3>We will contact you soon..</h3>";
+$sql = "SELECT project_id,name FROM projects WHERE state=0"; //reading things from the table
+$result = $conn->query($sql);
+if ($result->num_rows > 0){
+  echo'<select name="project" style="width: 400px; height: 40px">';
+  
+  while($row = $result->fetch_assoc()){       //while loop
+      echo '<option value="'.$row['project_id'].'">' . $row['name'] . '</option>
+      ';
+      
+  }
+  echo'</select>';	
 }else{
-    echo "Error: ". $sql ."<br>" . $conn->error;
+  echo "0 results";
 }
-}
+$dbConnectionPool->dispose($conn); // sent the connection object to unlocked list in the objectpool
+$conn->close();    //close the connection with database
 
-    
 ?>
+<br>
+
+
+<input class="submit-btn" type="submit" value="SUBMIT">
+</form>
+					
 
                 </div><!-- .col -->
 

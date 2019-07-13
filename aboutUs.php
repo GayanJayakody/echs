@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Propose Project</title>
+    <title>Hello World</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -43,7 +42,7 @@
 
                 <div class="col-12 col-lg-5 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
                     <div class="donate-btn">
-                        <a href="#">Donate Now</a>
+                        <a href="DonationDetails">Donate Now</a>
 						<a href="#">Log in</a>
 						<a href="#">Sign in</a>
                     </div><!-- .donate-btn -->
@@ -62,12 +61,11 @@
 
                     <nav class="site-navigation d-flex justify-content-end align-items-center">
                         <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                            <li class="current-menu-item"><a href="index.php">Home</a></li>
-                                <li><a href="about.php">About us</a></li> 
+                            <li class="current-menu-item"><a href="HomePage.php">Home</a></li>
+                                <li><a href="aboutUs.php">About us</a></li> 
                                 <li><a href="portfolio.html">Gallery</a></li>
-                                <li><a href="projectview.php">Projects</a></li>
-                                <li><a href="contact.php">Contact</a></li>
-                        </ul>
+                                <li><a href="ProjectsView.php">Projects</a></li>
+                                <li><a href="ContactForm.php">Contact</a></li>
                     </nav><!-- .site-navigation -->
 
                     <div class="hamburger-menu d-lg-none">
@@ -86,81 +84,38 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>Purpose a Project</h1>
+                    <h1>About Us</h1>
                 </div><!-- .col -->
             </div><!-- .row -->
         </div><!-- .container -->
     </div><!-- .page-header -->
 
-    <div class="contact-page-wrap">
+    <div class="welcome-wrap">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-1">
-                   
+                <div class="col-12 col-lg-6 order-2 order-lg-1">
+                    <div class="welcome-content">
+                        <header class="entry-header">
+                            <h2 class="entry-title">Our Vision & Target</h2>
+                        </header><!-- .entry-header -->
+
+                        <div class="entry-content mt-5">
+                            <p>There are more than 5000 schools in Srilanka with less facilities with difficulties. Our aim is supporting those students to giving study materiel and uniforms. Also try to improve the schools with some physical support with Library projects etc..</p>
+                        </div><!-- .entry-content -->
+
+                        
+                    </div><!-- .welcome-content -->
                 </div><!-- .col -->
 
-                <div class="col-12 col-lg-11">
-                    
-<form class="contact-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-  	<!--form action="sendToProposedProject.php" method="post" /-->
-
-    <label for="fname">Your Name</label>
-    <input type="text" id="name" name="name" placeholder="Kumar">
-
-    <label for="pnumber">Contact No</label>
-    <input type="text" id="pnumber" name="pnumber" placeholder="0773608701">
-
-    <label for="email">Email Address</label>
-    <input type="text" id="email" name="email" placeholder="computer@gmail.com">
-
-    <label for="Description">Project Description</label>
-    <input type="text" id="description" name="description" placeholder="Please give a brief description about the project">
-    
-    </select>
-    
-    <input class="btn gradient-bg" type="submit" value="Submit">
-  </form>
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                          
-$name=$_POST['name'];
-echo "Name: ".$name."<br>";
-$pnumber=$_POST['pnumber'];
-echo "Your Phone Number: ".$pnumber."<br>";
-$email=$_POST['email'];
-echo "Your Emali Address: ".$email."<br>";
-$description=$_POST['description'];
-echo "Description: ".$description."<br>";
-$date=strval(date("Y-m-d"));
-$time= strval(date("H:i:s"));
-
-require_once('Database Connection ObjectPool.php');
-$conn = $dbConnectionPool->get();
-
-if ($conn->connect_error){                       
-    die("Connection failed: " . $conn->connect_error);
-} 
-
-$sql = "INSERT INTO proposedprojects(readed,submitdate,submittime,proposername,pnumber,email,description) VALUES (false,'$date','$time','$name','$pnumber','$email','$description')";
-if ($conn->query($sql)===TRUE){
-    echo "<h3>The project you proposed has been recorded successfully</h3>"."<h3>We will contact you soon..</h3>";
-}else{
-    echo "Error: ". $sql ."<br>" . $conn->error;
-}
-}
-
-    
-?>
-
+                <div class="col-12 col-lg-6 order-1 order-lg-2">
+                    <img src="images/welcome1.jpg" alt="welcome">
                 </div><!-- .col -->
-
-                
             </div><!-- .row -->
         </div><!-- .container -->
-    </div>
+    </div><!-- .home-page-icon-boxes -->
 
     
+
 <footer class="site-footer">
         <div class="footer-widgets">
             <div class="container">

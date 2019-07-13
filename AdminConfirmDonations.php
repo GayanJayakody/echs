@@ -1,72 +1,110 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 30px;
-  height: 17px;
-}
+    <title>Confirm Donations</title>
 
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 13px;
-  width: 13px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
+    <!-- ElegantFonts CSS -->
+    <link rel="stylesheet" href="css/elegant-fonts.css">
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+    <!-- themify-icons CSS -->
+    <link rel="stylesheet" href="css/themify-icons.css">
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(13px);
-  -ms-transform: translateX(13px);
-  transform: translateX(13px);
-}
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="css/swiper.min.css">
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 3417px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-</style>
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
+<body class="single-page about-page">
+<header class="site-header">
+    <div class="top-header-bar">
+        <div class="container">
+            <div class="row flex-wrap justify-content-center justify-content-lg-between align-items-lg-center">
+                <div class="col-12 col-lg-7 d-none d-md-flex flex-wrap justify-content-center justify-content-lg-start mb-3 mb-lg-0">
+                    <div class="header-bar-email">
+                        MAIL: <a href="#">contact@ourcharity.com</a>
+                    </div><!-- .header-bar-email -->
 
-<body>
+                    <div class="header-bar-text">
+                        <p>PHONE: <span>+24 3772 120 091 / +56452 4567</span></p>
+                    </div><!-- .header-bar-text -->
+                </div><!-- .col -->
 
+                <div class="col-12 col-lg-5 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
+                    <div class="donate-btn">
+                         <a href="#">Donate Now</a>
+                          <a onclick="document.getElementById('id01').style.display='block'">My Profile</a>
+                    </div><!-- .donate-btn -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .top-header-bar -->
+
+    <div class="nav-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex flex-wrap justify-content-between align-items-center">
+                    <div class="site-branding d-flex align-items-center">
+                        <a class="d-block" href="HomePage.php" rel="home"><img class="d-block" src="images/logo4.png" alt="logo" style="width: 400px; height: 50px"></a>
+                    </div><!-- .site-branding -->
+
+                    <nav class="site-navigation d-flex justify-content-end align-items-center">
+                        <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-content-center">
+                        <li class="current-menu-item"><a href="indexAdmin.php">Home</a></li>
+                                <li><a href="ProjectsView.php">Projects</a></li>
+                                <li><a href="AdminViewProposedProjects.php">Proposed Projects</a></li>
+                                <li><a href="AdminNewProject.php">Add Project</a></li>
+                                <li><a href="AdminEditProjects.php">Edit Project</a></li>
+                                <li><a onclick="addMember()">Add Member</a></li>
+                        </ul>
+                    </nav><!-- .site-navigation -->
+
+                    <div class="hamburger-menu d-lg-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div><!-- .hamburger-menu -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .nav-bar -->
+</header><!-- .site-header -->
+
+     
+
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Donation Approving</h1>
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .page-header -->
+
+    <div class="contact-page-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-1">
+                   
+                </div><!-- .col -->
+
+                <div class="col-12 col-lg-10">
+				<form class="contact-form" action="createNewProjectCode.php" method="post" enctype="multipart/form-data">
+				
 <?php
 
 require_once('Database Connection ObjectPool.php');
@@ -75,34 +113,35 @@ $conn = $dbConnectionPool->get();
 if ($conn->connect_error){                                   // check whether the connection is correctly established or not
     die("Connection failed: " . $conn->connect_error);
 }                                                            // upto here ,connection is established
-echo "<h1>Admin Panel/Donations Approving       </h1>";
-echo '<h3><a href="#C4">View Approved Donations</a></h3>';
+
+echo '<h3><a class="" href="#C4"><b>Pending Donations</b></a></h3>';
+
 $sql = "SELECT id,ProjectID,amount,submitdate,submittime,BankSlip,isMember,UserID,fullname,NIC,email,pnumber,approved FROM donation Where approved=false"; //reading things from the table
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0){
     while($row = $result->fetch_assoc()){       //while loop
-        echo "<b>Data & Time : </b>".$row["submitdate"]." ".$row["submittime"];
+        echo "<b>Data & Time  : </b>".$row["submitdate"]." ".$row["submittime"];
         echo "<br>";
        
-        echo "<b>Name : </b>".$row["fullname"];
+        echo "<b>Name         : </b>".$row["fullname"];
         echo "<br>";
-        echo '<b>Email : </b><a href="mailto:'.$row["email"].'?Subject=Samaja%20Sathkara&body=" target="_top">'.$row["email"].'</a>';
+        echo '<b>Email        : </b><a href="mailto:'.$row["email"].'?Subject=Samaja%20Sathkara&body=" target="_top">'.$row["email"].'</a>';
         echo '(Click this link to send a email)';
         echo "<br>";
         echo "<b>Phone Number : </b>".$row["pnumber"];
         echo "<br>";
-        echo "<b>ProjectID : </b>".$row["ProjectID"];
+        echo "<b>ProjectID    : </b>".$row["ProjectID"];
         echo "<br>";
-        echo "<b>amount : </b>".$row["amount"];
+        echo "<b>amount       : </b>".$row["amount"];
         echo "<br>";
-        echo "<b>BankSlip : </b>".$row["BankSlip"];
+        echo "<b>BankSlip     : </b>".$row["BankSlip"];
         echo "<br>";
-        echo "<b>isMember : </b>".$row["isMember"];
+        echo "<b>isMember     : </b>".$row["isMember"];
         echo "<br>";
-        echo "<b>UserID : </b>".$row["UserID"];
+        echo "<b>UserID       : </b>".$row["UserID"];
         echo "<br>";
-        echo "<b>NIC : </b>".$row["NIC"];
+        echo "<b>NIC          : </b>".$row["NIC"];
         echo "<br>";
         echo '<p>Mark as Approved: <label class="switch"> <input type="checkbox" id="'.$row["id"].'" onclick="myFunction('.$row["id"].')"><span class="slider round"></span></label></p>';
         echo "<hr>";
@@ -112,34 +151,34 @@ if ($result->num_rows > 0){
   }
 
 echo "<hr>";echo "<hr>";
-echo '<h2 id="C4">Approved Donations</h2>';
+echo '<h2 id="C4"><b>Approved Donations</b></h2>';
 
 $sql = "SELECT id,ProjectID,amount,submitdate,submittime,BankSlip,isMember,UserID,fullname,NIC,email,pnumber,approved FROM Donation Where approved=true"; //reading things from the table
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0){
     while($row = $result->fetch_assoc()){       //while loop
-        echo "<b>Data & Time : </b>".$row["submitdate"]." ".$row["submittime"];
+        echo "<b>Data & Time  : </b>".$row["submitdate"]." ".$row["submittime"];
         echo "<br>";
        
-        echo "<b>Name : </b>".$row["fullname"];
+        echo "<b>Name         : </b>".$row["fullname"];
         echo "<br>";
-        echo '<b>Email : </b><a href="mailto:'.$row["email"].'?Subject=Samaja%20Sathkara&body=" target="_top">'.$row["email"].'</a>';
+        echo '<b>Email        : </b><a href="mailto:'.$row["email"].'?Subject=Samaja%20Sathkara&body=" target="_top">'.$row["email"].'</a>';
         echo '(Click this link to send a email)';
         echo "<br>";
         echo "<b>Phone Number : </b>".$row["pnumber"];
         echo "<br>";
-        echo "<b>ProjectID : </b>".$row["ProjectID"];
+        echo "<b>ProjectID    : </b>".$row["ProjectID"];
         echo "<br>";
-        echo "<b>amount : </b>".$row["amount"];
+        echo "<b>amount       : </b>".$row["amount"];
         echo "<br>";
-        echo "<b>BankSlip : </b>".$row["BankSlip"];
+        echo "<b>BankSlip     : </b>".$row["BankSlip"];
         echo "<br>";
-        echo "<b>isMember : </b>".$row["isMember"];
+        echo "<b>isMember     : </b>".$row["isMember"];
         echo "<br>";
-        echo "<b>UserID : </b>".$row["UserID"];
+        echo "<b>UserID       : </b>".$row["UserID"];
         echo "<br>";
-        echo "<b>NIC : </b>".$row["NIC"];
+        echo "<b>NIC          : </b>".$row["NIC"];
         echo "<br>";
         //echo '<p>Mark as Read: <label class="switch"> <input type="checkbox" id="'.$row["id"].'" onclick="myFunction('.$row["id"].')"><span class="slider round"></span></label></p>';
         echo '<p>Mark as Approved: <label class="switch"> <input type="checkbox" checked id="'.$row["id"].'" onclick="myFunction('.$row["id"].')"><span class="slider round"></span></label></p>';
@@ -181,7 +220,90 @@ function myFunction(a) {
       
 }
 </script>
+
+									</form>
+                    
+					
+
+                </div><!-- .col -->
+
+                
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div>
+
+    
+<footer class="site-footer">
+        <div class="footer-widgets">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="foot-about">
+                            
+                            <ul class="d-flex flex-wrap align-items-center">
+                                <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div><!-- .foot-about -->
+                    </div><!-- .col -->
+
+                    <div class="col-12 col-md-6 col-lg-3 mt-5 mt-md-0">
+					<div class="foot-contact">
+					<ul>
+                        <li><i class="fa fa-phone"></i><span>+94112564517 / +94775672431</span></li>
+						</ul>
+						</div>
+                    </div><!-- .col -->
+
+                    <div class="col-12 col-md-6 col-lg-3 mt-5 mt-md-0">
+					<div class="foot-contact">
+						<ul>
+                            <li><i class="fa fa-envelope"></i><span>EcanhelpSone@gmail.com</span></li>
+								</ul>
+								</div>
+                    </div><!-- .col -->
+
+                    <div class="col-12 col-md-6 col-lg-3 mt-5 mt-md-0">
+                        <div class="foot-contact">
+						<ul>
+                            <li><i class="fa fa-map-marker"></i><span>Main Str. no 45-46, b3, Katubedda, Moratuwa, Sri Lanka</span></li>
+							</ul>
+
+                        </div><!-- .foot-contact -->
+
+                        <div class="col-12">
+                           
+                        </div><!-- .search-widget -->
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </div><!-- .footer-widgets -->
+
+        <div class="footer-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="m-0">
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by HALOGEN</a>
+</p>
+                    </div><!-- .col-12 -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </div><!-- .footer-bar -->
+    </footer><!-- .site-footer -->
+
+    <script type='text/javascript' src='js/jquery.js'></script>
+    <script type='text/javascript' src='js/jquery.collapsible.min.js'></script>
+    <script type='text/javascript' src='js/swiper.min.js'></script>
+    <script type='text/javascript' src='js/jquery.countdown.min.js'></script>
+    <script type='text/javascript' src='js/circle-progress.min.js'></script>
+    <script type='text/javascript' src='js/jquery.countTo.min.js'></script>
+    <script type='text/javascript' src='js/jquery.barfiller.js'></script>
+    <script type='text/javascript' src='js/custom.js'></script>
+
 </body>
 </html>
-
-
